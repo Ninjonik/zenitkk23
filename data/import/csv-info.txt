@@ -1,0 +1,10 @@
+V prípade importu do databázy nastavte:
+
+Columns separated with: ;
+Columns enclosed with: "
+Columns escaped with: \
+Lines terminated with: auto
+
+Poradie stĺpcov je rovnaké ako je použité v zadaní - časť C
+
+pre tabuľku reservation sú vytvorené 2 csv súbory. Jeden je so serializovaným polom a druhý obsahuje JSON dáta. Vyberte si jeden, ktorý chcete používať na základe Vášho PHP kódu.

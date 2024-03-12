@@ -1,0 +1,17 @@
+Pre nadpisy je použitý font "Patua One", ktorý sa nachádza v Google knižnici fontov.
+https://fonts.google.com/specimen/Patua+One?query=Patua+One
+
+odkaz na googleApi:
+https://fonts.googleapis.com/css2?family=Patua+One&display=swap
+
+Font máte uložený aj v súbore Patua_One.zip ak by ste ho chceli načítavať priamo
+
+--------------------------------------------------
+
+Pre texty je použitý font "Roboto", ktorý sa nachádza v Google knižnici fontov.
+https://fonts.google.com/specimen/Roboto?query=roboto
+
+odkaz na googleApi:
+https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
+
+Font máte uložený aj v súbore Roboto.zip ak by ste ho chceli načítavať priamo
