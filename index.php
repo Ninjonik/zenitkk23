@@ -15,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -31,7 +31,11 @@
                 textCBGMoreHover: '#999999',
                 textDark: '#4d565f',
                 textDarker: "#617391",
-              }
+              },
+              screens: {
+                'sm': '640px',
+                'xxl': {'min': '10px', 'max': '100px'},
+              },
             }
           }
         }
@@ -41,23 +45,16 @@
             background-image: url('images/head01.jpg')
         }
 
-        .h1, .h2, .h3, .h4, .h5 {
-            font-family: Papua, "Papua One";
-            font-variant: "Papua One", "One";
-        }
-
-        .text-outline {
-            text-outline: black;
-            color: white;
-        }
-
-        .text-outline:hover {
-            text-outline: white;
-            color: black;
+        h1, h2, h3, h4, h5 {
+            font-family: 'Roboto';
         }
 
         html {
             scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Patua One';
         }
       </style>
 </head>
@@ -93,7 +90,7 @@
 
 ?>
 
-<body class="w-full flex flex-col items-center min-h-screen font-['Roboto']">
+<body class="flex flex-col items-center w-full min-h-screen">
     <main class="w-[1140px] flex flex-col items-center" id="top">
 
         <?php 
@@ -214,8 +211,8 @@
 
         <header class="w-full flex flex-row justify-center items-center bg-fill bg-no-repeat bg-main h-[60dvh] text-white gap-8">
             <div class="flex flex-col w-1/2 text-center">
-                <h1 class="text-[80px] font-['Papua'] text-outline">ZenSki</h1>
-                <span class="text-md">Doprajte si zimnú dovolenku na nezabudnutie. Lyžiarske stredisko ZenSki je ideálnym miestom pre lyžiarov, snowboardistov, rodiny s deťmi a milovníkov prírody.            </span>
+                <h1 class="text-[80px] text-outline">ZenSki</h1>
+                <span class="text-md xxl:text-red-500">Doprajte si zimnú dovolenku na nezabudnutie. Lyžiarske stredisko ZenSki je ideálnym miestom pre lyžiarov, snowboardistov, rodiny s deťmi a milovníkov prírody.            </span>
             </div>
             <form class="flex flex-col gap-3" name="newsletter" method="POST">
                 <h2 class="text-3xl">Chcem dostávať novinky</h2>
@@ -224,7 +221,7 @@
                 <button class="transition-all ease-in border border-white bg-none hover:bg-textDarker" type="submit" name="submit_newsletter">Odoslať</button>
             </div>
         </header>
-        <article class="w-full p-16 flex flex-row items-center justify-center text-center bg-[#E4E2E0]">
+        <article class="w-full p-16 flex flex-col md:flex-row items-center justify-center text-center bg-[#E4E2E0]">
             <div class="flex flex-col items-center justify-center w-full h-full text-center">
                 <h3 class="text-[120px] text-white font-bold">01.</h3>
                 <h2 class="text-textDark text-[50px]">Zjazdovky <br /> pre všetkých</h2>
@@ -264,7 +261,7 @@
                 </div>
                 <button class="w-48 font-bold transition-all ease-in border border-white text-md bg-none hover:bg-textDarker" onClick='openModal(3)'>Rezervovať skipas</button>
             </div>
-            <div class='flex flex-row w-full h-full col-span-12' id='slideshow'>
+            <div class='flex flex-row w-full h-full col-span-12' id='slideShow'>
             <?php 
 
             $locations_query = mysqli_execute_query($conn, "SELECT * FROM `location`");
@@ -283,28 +280,59 @@
             ?>
             </div>
             <script>
-                const slides = Array.from(document.querySelectorAll('.slide'));
-                const slideShow = document.getElementById('slideshow');
+                const slideShow = document.getElementById('slideShow')
+                const slides = Array.from(document.querySelectorAll('.slide'))
 
-                const overFour = slides.length - 4;
+                const slideLimit = 4
+                const overLimit = slides.length - slideLimit
 
-                const updateSlideShow = () => {
-                    slideShow.append(slideShow.firstElementChild);
-                    slides.push(slides.shift());
-                    for(i = overFour; i > 0; i--){
-                        console.info(i);
-                        slides[4 + i - 1].style.display = 'none';
+                const updateSlides = () => {
+
+                    slideShow.append(slideShow.firstElementChild)
+                    slides.push(slides.shift())
+
+                    for(i = overLimit; i > 0; i--){
+                        slides[slideLimit + i - 1].style.display = 'none'
                     }
-                    if(overFour > 0){
-                        slides[3].style.display = 'block';
-                    }                    
+
+                    if(overLimit > 0){
+                        slides[slideLimit - 1].style.display = 'block'
+                    }
+
                 }
 
-                updateSlideShow();
+                updateSlides()
 
                 setInterval(() => {
-                    updateSlideShow();
-                }, 2000);
+                        updateSlides()
+                }, 2000)
+            </script>
+
+            <script>
+
+                // const slides = Array.from(document.querySelectorAll('.slide'));
+                // const slideShow = document.getElementById('slideShow');
+
+                // const overFour = slides.length - 4;
+
+                // const updateSlideShow = () => {
+                //     slideShow.append(slideShow.firstElementChild);
+                //     slides.push(slides.shift());
+                //     for(i = overFour; i > 0; i--){
+                //         console.info(i);
+                //         slides[4 + i - 1].style.display = 'none';
+                //     }
+                //     if(overFour > 0){
+                //         slides[3].style.display = 'block';
+                //     }                    
+                // }
+
+                // updateSlideShow();
+
+                // setInterval(() => {
+                //     updateSlideShow();
+                // }, 2000);
+
             </script>
 
             <?php 
